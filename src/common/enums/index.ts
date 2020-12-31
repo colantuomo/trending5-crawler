@@ -1,4 +1,4 @@
 export enum Topics {
-  Trending = "trending",
-  Economy = "economy",
+  Trending = 'trending',
+  Economy = 'economy',
 }

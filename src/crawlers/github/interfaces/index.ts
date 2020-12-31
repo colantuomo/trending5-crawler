@@ -1,4 +1,4 @@
-import { DefaultData } from "../../../common/interfaces";
+import { DefaultData } from '../../../common/interfaces';
 
 export interface GithubTrending extends DefaultData {
   description: string;
