@@ -1,9 +1,10 @@
 import { Crawlers } from "../../crawlers";
+import { DefaultData } from "../interfaces";
 
 export interface CrawlerData {
   crawler: Crawlers;
   topic: any;
-  items: any[];
+  items: DefaultData[];
   date?: Date;
 }
 
