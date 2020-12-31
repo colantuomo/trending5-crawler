@@ -1,5 +1,5 @@
-import { Crawlers } from "../../crawlers";
-import { DefaultData } from "../interfaces";
+import { Crawlers } from "../crawlers";
+import { DefaultData } from "../common/interfaces";
 
 export interface CrawlerData {
   crawler: Crawlers;
