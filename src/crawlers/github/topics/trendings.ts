@@ -1,11 +1,10 @@
 import * as puppeteer from "puppeteer";
-import { Crawlers } from "../..";
-import { GHTopics, GithubTrending } from "../interfaces";
+import { GithubTrending } from "../interfaces";
 
-const GH_TRENDING_PAGE = "https://github.com/trending";
+const GH_BASE = "https://github.com";
+const GH_TRENDING_PAGE = `${GH_BASE}/trending`;
 
 export const trendings = async (): Promise<GithubTrending[]> => {
-  console.log(`${Crawlers.Github} - [${GHTopics.Trending}] starting..`);
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
   await page.goto(GH_TRENDING_PAGE);
@@ -24,12 +23,14 @@ export const trendings = async (): Promise<GithubTrending[]> => {
     el.map((e) => e.textContent.trim())
   );
   await browser.close();
-  const repos = repoNames.map((name, idx) => {
+  const repos = repoNames.map((title, idx) => {
     const description = details[idx];
     const language = languages[idx];
     const star = stars[idx];
-    return { name, description, language, stars: star };
+    const img =
+      "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png";
+    const link = `${GH_BASE}${title}`;
+    return { title, description, language, stars: star, img, link };
   });
-  console.log(`${Crawlers.Github} - [${GHTopics.Trending}] ending..`);
   return repos;
 };

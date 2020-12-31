@@ -1,11 +1,9 @@
 import * as puppeteer from "puppeteer";
-import { Crawlers } from "../../";
-import { G1Economy, G1Topics } from "../interfaces";
+import { DefaultData } from "../../../common/interfaces";
 
 const G1_ECONOMY = "https://g1.globo.com/economia/";
 
-export const economy = async (): Promise<G1Economy[]> => {
-  console.log(`${Crawlers.G1} - [${G1Topics.Economy}] starting..`);
+export const economy = async (): Promise<DefaultData[]> => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
   await page.goto(G1_ECONOMY);
@@ -19,11 +17,14 @@ export const economy = async (): Promise<G1Economy[]> => {
   const descriptions = await page.$$eval(".feed-post-body-resumo", (el) =>
     el.map((x) => x.textContent.trim())
   );
+  const imgs = await page.$$eval(".feed-media-wrapper img", (el) =>
+    el.map((x) => x.getAttribute("src")).slice(0, 5)
+  );
   await browser.close();
   const data = header.map(({ title, link }, idx) => {
     const description = descriptions[idx];
-    return { title, description, link };
+    const img = imgs[idx];
+    return { title, description, link, img };
   });
-  console.log(`${Crawlers.G1} - [${G1Topics.Economy}] ending..`);
   return data;
 };
