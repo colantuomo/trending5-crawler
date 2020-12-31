@@ -1,9 +1,10 @@
 import { Crawlers } from "../crawlers";
 import { DefaultData } from "../common/interfaces";
+import { Topics } from "../common/enums";
 
 export interface CrawlerData {
   crawler: Crawlers;
-  topic: any;
+  topic: Topics;
   items: DefaultData[];
   date?: Date;
 }
