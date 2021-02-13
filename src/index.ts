@@ -19,8 +19,7 @@ const start = async () => {
 };
 
 start()
-  .then(() => process.exit())
   .catch(err => {
     console.error(err);
-    process.exit();
-  });
+  })
+  .finally(() => process.exit());
