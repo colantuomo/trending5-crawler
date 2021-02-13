@@ -1,10 +1,10 @@
-import * as puppeteer from 'puppeteer';
+import { launch } from 'puppeteer';
 import { DefaultData } from '../../../common/interfaces';
 
 const G1_ECONOMY = `https://www.youtube.com/feed/trending`;
 
 export const trendings = async (): Promise<DefaultData[]> => {
-  const browser = await puppeteer.launch();
+  const browser = await launch();
   const page = await browser.newPage();
   await page.goto(G1_ECONOMY);
   const trendingVideos = await page.$$eval(

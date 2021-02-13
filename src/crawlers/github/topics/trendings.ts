@@ -1,11 +1,11 @@
-import * as puppeteer from 'puppeteer';
+import { launch } from 'puppeteer';
 import { GithubTrending } from '../interfaces';
 
 const GH_BASE = 'https://github.com';
 const GH_TRENDING_PAGE = `${GH_BASE}/trending`;
 
 export const trendings = async (): Promise<GithubTrending[]> => {
-  const browser = await puppeteer.launch();
+  const browser = await launch();
   const page = await browser.newPage();
   await page.goto(GH_TRENDING_PAGE);
   const repoNames = await page.$$eval('.Box-row .lh-condensed a', el =>

@@ -1,10 +1,10 @@
-import * as puppeteer from 'puppeteer';
+import { launch } from 'puppeteer';
 import { DefaultData } from '../../../common/interfaces';
 
 const G1_ECONOMY = 'https://g1.globo.com/economia/';
 
 export const economy = async (): Promise<DefaultData[]> => {
-  const browser = await puppeteer.launch();
+  const browser = await launch();
   const page = await browser.newPage();
   await page.goto(G1_ECONOMY);
   const header = await page.$$eval('.feed-post-body-title ._b a', el =>
