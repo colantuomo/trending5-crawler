@@ -8,14 +8,19 @@ import { startYoutube } from './crawlers/youtube';
 dotenv.config();
 
 const start = async () => {
-  console.log('## Process start at', new Date().getTime());
+  const start = new Date().getTime();
+  console.log('## Process start. Trying to connect with mongodb.');
   await db.connect();
-  console.log('deleting older documents...');
+  console.log('## Deleting older documents...');
   await db.deleteAll();
-  await startGithub();
-  await startYoutube();
-  await startG1();
-  console.log('## Process end at', new Date().getTime());
+  console.log('## Init crawlers');
+  await Promise.all([
+    startGithub(),
+    startYoutube(),
+    startG1(),
+  ]);
+  const end = new Date().getTime();
+  console.log('## Total time: ', end - start);
 };
 
 start()

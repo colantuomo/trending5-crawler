@@ -20,7 +20,7 @@ const connect = () => {
 };
 
 const deleteAll = async () => {
-  return await TopicsModel.deleteMany({});
+  return TopicsModel.deleteMany({});
 };
 
 const save = (data: CrawlerData) => {
